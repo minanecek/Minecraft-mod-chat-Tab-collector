@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "tabcollector",
+  "version": "${version}",
+  "name": "Tab Collector",
+  "description": "Minecraft mod for logging tab completion commands.",
+  "authors": ["Tvé jméno"],
+  "contact": {
+    "homepage": "https://github.com/minanecek/Minecraft-mod-chat-Tab-collector"
+  },
+  "license": "MIT",
+  "icon": "assets/tabcollector/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.example.tabcollector.TabCollector"
+    ]
+  },
+  "depends": {
+    "fabric-api": "*",
+    "minecraft": "1.18.2"
+  }
+}
