@@ -1,0 +1,38 @@
+package com.example.tabcollector;
+
+import com.mojang.logging.LogUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
+import net.minecraft.text.Text;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class TabCollector implements ClientModInitializer {
+    @Override
+    public void onInitializeClient() {
+        // Začíná se zachytávat příkazy
+        MinecraftClient client = MinecraftClient.getInstance();
+        
+        // Logování příkazů do souboru
+        client.getNetworkHandler().addPacketListener((packet) -> {
+            if (packet instanceof ClientCommandC2SPacket) {
+                String message = packet.getCommand().toString();
+                logToFile(message);
+            }
+        });
+    }
+
+    // Metoda pro logování příkazů do souboru
+    private void logToFile(String command) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("tabcollector_log.txt", true))) {
+            writer.println(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
