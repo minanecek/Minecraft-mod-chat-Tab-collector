@@ -1,0 +1,33 @@
+plugins {
+    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'maven-publish'
+    id 'java'
+}
+
+group = 'com.example'
+version = '1.0.0'
+archivesBaseName = 'tabcollector'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabricmc.net' }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    // Minecraft a Fabric API
+    mappings 'net.fabricmc:yarn:1.18.2+build.10:v2'
+    loom 'net.fabricmc:fabric-loom:0.11-SNAPSHOT'
+    modCompile 'net.fabricmc.fabric-api:fabric-api:0.40.1+1.18.2'
+}
+
+tasks {
+    jar {
+        archiveBaseName = 'tabcollector'
+        from sourceSets.main.output
+    }
+
+    publishToMavenLocal {
+        dependsOn jar
+    }
+}
